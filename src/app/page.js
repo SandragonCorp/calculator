@@ -63,11 +63,11 @@ export default function Home() {
 
   useEffect(() => {
     calculateSubTotal();
-  }, [basePrice, materialPrice, heightPrice, dimensionsPrice, length]);
+  }, [basePrice, materialPrice, heightPrice, dimensionsPrice, length, removalPrice, totalRemovalPrice]);
 
   useEffect(() => {
     calculateTotal();
-  }, [subTotal]);
+  });
 
   useEffect(() => {
     if (total > 1200) {
