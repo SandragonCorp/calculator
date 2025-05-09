@@ -7,7 +7,7 @@ export default function Toggle({ func }) {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div>
+    <div className="flex flex-row gap-6">
       <p className="font-semibold">Remove existing fence</p>
       <label className="relative inline-flex items-center cursor-pointer">
         <input
@@ -18,7 +18,7 @@ export default function Toggle({ func }) {
             if (isChecked) {
               func(0);
             } else {
-              func(450);
+              func(9);
             }
           }}
           className="sr-only"

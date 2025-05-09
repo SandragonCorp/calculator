@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import RadioButton from "@/components/RadioButton";
 import Stockade from "@/ui/Stockade";
 import Bastion from "@/ui/Bastion";
@@ -21,8 +21,9 @@ export default function Home() {
   const [selectedDimensions, setSelectedDimensions] = useState('4" x 4"');
   const [dimensionsPrice, setDimensionsPrice] = useState(0);
 
-  const [removalPrice, setRemovalPrice] = useState(0);
   const [length, setLength] = useState(0);
+  const [removalPrice, setRemovalPrice] = useState(0);
+  const [totalRemovalPrice, setTotalRemovalPrice] = useState(0);
   const [gate, setGate] = useState(0);
   const [gatePrice, setGatePrice] = useState(0);
 
@@ -35,6 +36,11 @@ export default function Home() {
     setGatePrice(price);
   }
 
+  function calculateTotalRemovalPrice() {
+    const removal = removalPrice * length;
+    setTotalRemovalPrice(removal);
+  }
+
   function calculateSubTotal() {
     const initialSubTotal =
       basePrice + materialPrice + heightPrice + dimensionsPrice;
@@ -43,7 +49,7 @@ export default function Home() {
   }
 
   function calculateTotal() {
-    const t = subTotal + removalPrice + gatePrice;
+    const t = subTotal + totalRemovalPrice + gatePrice;
     setTotal(t);
   }
 
@@ -52,12 +58,16 @@ export default function Home() {
   }, [gate]);
 
   useEffect(() => {
+    calculateTotalRemovalPrice();
+  }, [removalPrice, length]);
+
+  useEffect(() => {
     calculateSubTotal();
   }, [basePrice, materialPrice, heightPrice, dimensionsPrice, length]);
 
   useEffect(() => {
     calculateTotal();
-  }, [subTotal, removalPrice, gatePrice]);
+  }, [subTotal]);
 
   useEffect(() => {
     if (total > 1200) {
@@ -70,100 +80,106 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-row items-center justify-center min-h-screen p-4">
-        <div className="flex flex-col items-center justify-center w-fit p-6 mx-4 bg-white rounded-lg shadow-md">
+        <div className="flex flex-col items-center justify-center p-6 mx-4 bg-white rounded-lg shadow-md max-w-5xl min-w-80">
           <h1 className="mb-4 text-center">
             This estimate includes everything needed for the project: utility
             locates, digging posts, concrete, labour and materials!
           </h1>
           {/* Radio Group */}
-          <div className="flex flex-row items-starts w-full justify-items-start gap-36 mb-10">
+          <div className="flex flex-col items-starts w-full justify-items-start gap-5 md:gap-36 mb-10">
             {/* Material Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Material</p>
-              <RadioButton
-                label={"Pressure Treated"}
-                name={"material"}
-                value={"Pressure Treated"}
-                checked={selectedMaterial === "Pressure Treated"}
-                onChange={() => {
-                  setSelectedMaterial("Pressure Treated");
-                  setMaterialPrice(0);
-                }}
-              />
-              <RadioButton
-                label={"Cedar"}
-                name={"material"}
-                value={"Cedar"}
-                checked={selectedMaterial === "Cedar"}
-                onChange={() => {
-                  setSelectedMaterial("Cedar");
-                  setMaterialPrice(25);
-                }}
-              />
+              <div className="flex flex-row gap-6">
+                <RadioButton
+                  label={"Pressure Treated"}
+                  name={"material"}
+                  value={"Pressure Treated"}
+                  checked={selectedMaterial === "Pressure Treated"}
+                  onChange={() => {
+                    setSelectedMaterial("Pressure Treated");
+                    setMaterialPrice(0);
+                  }}
+                />
+                <RadioButton
+                  label={"Cedar"}
+                  name={"material"}
+                  value={"Cedar"}
+                  checked={selectedMaterial === "Cedar"}
+                  onChange={() => {
+                    setSelectedMaterial("Cedar");
+                    setMaterialPrice(25);
+                  }}
+                />
+              </div>
             </div>
             {/* Fence height Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Fence height</p>
-              <RadioButton
-                label={"4' (front yard)"}
-                name={"height"}
-                value={"4' (front yard)"}
-                checked={selectedHeight === "4' (front yard)"}
-                onChange={() => {
-                  setSelectedHeight("4' (front yard)");
-                  setHeightPrice(0);
-                }}
-              />
-              <RadioButton
-                label={"6' (front yard)"}
-                name={"height"}
-                value={"6' (front yard)"}
-                checked={selectedHeight === "6' (front yard)"}
-                onChange={() => {
-                  setSelectedHeight("6' (front yard)");
-                  setHeightPrice(6);
-                }}
-              />
+              <div className="flex flex-row gap-6">
+                <RadioButton
+                  label={"4' (front yard)"}
+                  name={"height"}
+                  value={"4' (front yard)"}
+                  checked={selectedHeight === "4' (front yard)"}
+                  onChange={() => {
+                    setSelectedHeight("4' (front yard)");
+                    setHeightPrice(0);
+                  }}
+                />
+                <RadioButton
+                  label={"6' (front yard)"}
+                  name={"height"}
+                  value={"6' (front yard)"}
+                  checked={selectedHeight === "6' (front yard)"}
+                  onChange={() => {
+                    setSelectedHeight("6' (front yard)");
+                    setHeightPrice(6);
+                  }}
+                />
+              </div>
             </div>
             {/* Post dimensions Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Post dimensions</p>
-              <RadioButton
-                label={'4" x 4"'}
-                name={"dimensions"}
-                value={'4" x 4"'}
-                checked={selectedDimensions === '4" x 4"'}
-                onChange={() => {
-                  setSelectedDimensions('4" x 4"');
-                  setDimensionsPrice(0);
-                }}
-              />
-              <RadioButton
-                label={'4" x 6"'}
-                name={"dimensions"}
-                value={'4" x 6"'}
-                checked={selectedDimensions === '4" x 6"'}
-                onChange={() => {
-                  setSelectedDimensions('4" x 6"');
-                  setDimensionsPrice(4);
-                }}
-              />
-              <RadioButton
-                label={'6" x 6"'}
-                name={"dimensions"}
-                value={'6" x 6"'}
-                checked={selectedDimensions === '6" x 6"'}
-                onChange={() => {
-                  setSelectedDimensions('6" x 6"');
-                  setDimensionsPrice(6);
-                }}
-              />
+              <div className="flex flex-row gap-6">
+                <RadioButton
+                  label={'4" x 4"'}
+                  name={"dimensions"}
+                  value={'4" x 4"'}
+                  checked={selectedDimensions === '4" x 4"'}
+                  onChange={() => {
+                    setSelectedDimensions('4" x 4"');
+                    setDimensionsPrice(0);
+                  }}
+                />
+                <RadioButton
+                  label={'4" x 6"'}
+                  name={"dimensions"}
+                  value={'4" x 6"'}
+                  checked={selectedDimensions === '4" x 6"'}
+                  onChange={() => {
+                    setSelectedDimensions('4" x 6"');
+                    setDimensionsPrice(4);
+                  }}
+                />
+                <RadioButton
+                  label={'6" x 6"'}
+                  name={"dimensions"}
+                  value={'6" x 6"'}
+                  checked={selectedDimensions === '6" x 6"'}
+                  onChange={() => {
+                    setSelectedDimensions('6" x 6"');
+                    setDimensionsPrice(6);
+                  }}
+                />
+              </div>
             </div>
           </div>
           {/* Inputs */}
-          <div className="flex flex-row items-starts w-full justify-between">
+          <div className="flex flex-col items-starts w-full justify-between">
             <Toggle func={setRemovalPrice} />
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-col gap-6">
               {/* Length */}
               <div>
                 <p className="font-semibold">Length in feet</p>
@@ -179,7 +195,7 @@ export default function Home() {
           {/* Fence Styles */}
           <div className="flex flex-col justify-items-start w-full mt-10 mb-10">
             <p className="font-semibold">Fence style</p>
-            <div className="flex flex-row justify-evenly">
+            <div className="grid grid-cols-2 md:grid-cols-3 l:grid-cols-1 gap-4 mt-4">
               <Stockade
                 label={"Stockade"}
                 value={"Stockade"}
