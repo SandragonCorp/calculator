@@ -1,7 +1,7 @@
 export default function Shadowbox({ label, value, checked, onChange }) {
   return (
     <section>
-      <label className="flex justify-start items-center cursor-pointer font-normal mt-4">
+      <label className="flex justify-start items-center cursor-pointer font-normal">
         <input
           type="radio"
           id={value}

@@ -86,11 +86,11 @@ export default function Home() {
             locates, digging posts, concrete, labour and materials!
           </h1>
           {/* Radio Group */}
-          <div className="flex flex-col items-starts w-full justify-items-start gap-5 md:gap-36 mb-10">
+          <div className="flex flex-col md:flex-row items-start w-full justify-start gap-5 md:gap-0 md:justify-evenly mb-10">
             {/* Material Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Material</p>
-              <div className="flex flex-row gap-6">
+              <div className="flex flex-row md:flex-col gap-6 md:gap-2">
                 <RadioButton
                   label={"Pressure Treated"}
                   name={"material"}
@@ -116,7 +116,7 @@ export default function Home() {
             {/* Fence height Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Fence height</p>
-              <div className="flex flex-row gap-6">
+              <div className="flex flex-row md:flex-col gap-6 md:gap-2">
                 <RadioButton
                   label={"4' (front yard)"}
                   name={"height"}
@@ -142,7 +142,7 @@ export default function Home() {
             {/* Post dimensions Option */}
             <div className="flex flex-col">
               <p className="font-semibold">Post dimensions</p>
-              <div className="flex flex-row gap-6">
+              <div className="flex flex-row md:flex-col gap-6 md:gap-2">
                 <RadioButton
                   label={'4" x 4"'}
                   name={"dimensions"}
@@ -177,9 +177,9 @@ export default function Home() {
             </div>
           </div>
           {/* Inputs */}
-          <div className="flex flex-col items-starts w-full justify-between">
+          <div className="flex flex-col items-starts w-full justify-between md:flex-row">
             <Toggle func={setRemovalPrice} />
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 md:flex-row">
               {/* Length */}
               <div>
                 <p className="font-semibold">Length in feet</p>
@@ -193,9 +193,9 @@ export default function Home() {
             </div>
           </div>
           {/* Fence Styles */}
-          <div className="flex flex-col justify-items-start w-full mt-10 mb-10">
+          <div className="flex flex-col justify-items-start w-full mt-8">
             <p className="font-semibold">Fence style</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 l:grid-cols-1 gap-4 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-2">
               <Stockade
                 label={"Stockade"}
                 value={"Stockade"}
@@ -246,7 +246,7 @@ export default function Home() {
           {/* Final  Total */}
           <input
             type="text"
-            className="appearance-none h-15 w-60 rounded px-2 py-1 focus:outline-none text-center bg-black text-white text-2xl"
+            className="appearance-none h-12 w-60 rounded px-2 focus:outline-none text-center bg-black text-white text-2xl"
             value={`$${displayPrice}`}
             readOnly
           />

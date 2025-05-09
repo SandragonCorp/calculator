@@ -2,7 +2,7 @@ export default function Inputs({ variable, func }) {
   return (
     <div className="flex flex-row items-center justify-between gap-1">
       <button
-        className="w-16 h-8 flex items-center justify-center border rounded text-xl bg-black text-white cursor-pointers"
+        className="w-16 md:w-12 lg:w-16 h-8 flex items-center justify-center border rounded text-xl bg-black text-white cursor-pointers"
         onClick={() => {
           if (variable > 0) {
             func(variable - 1);
@@ -15,7 +15,7 @@ export default function Inputs({ variable, func }) {
         type="number"
         inputMode="numeric"
         pattern="[0-9]*"
-        className="appearance-none w-40 border border-gray-400 rounded px-2 py-1 focus:outline-none text-center"
+        className="appearance-none w-full md:w-50 lg:w-40 border border-gray-400 rounded px-2 py-1 focus:outline-none text-center"
         value={variable}
         onChange={(e) => {
           const value = parseInt(e.target.value);
@@ -25,7 +25,7 @@ export default function Inputs({ variable, func }) {
         }}
       />
       <button
-        className="w-16 h-8 flex items-center justify-center border rounded text-xl bg-black text-white cursor-pointers"
+        className="w-16 md:w-12 lg:w-16 h-8 flex items-center justify-center border rounded text-xl bg-black text-white cursor-pointers"
         onClick={() => func(variable + 1)}
       >
         +
