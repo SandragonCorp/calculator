@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Fence Calculator",
-  description: "Calculate estimate amount for your fence",
+  title: "Jims Best Build",
+  description: "Jims Best Build",
 };
 
 export default function RootLayout({ children }) {

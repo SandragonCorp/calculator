@@ -71,7 +71,7 @@ export default function Home() {
 
   useEffect(() => {
     if (total > 1200) {
-      setDisplayPrice(total);
+      setDisplayPrice(Math.trunc(total));
     } else {
       setDisplayPrice(1200);
     }
@@ -81,10 +81,7 @@ export default function Home() {
     <section>
       <div className="flex flex-row items-center justify-center min-h-screen p-4">
         <div className="flex flex-col items-center justify-center p-6 mx-4 bg-white rounded-lg shadow-md max-w-5xl min-w-80">
-          <h1 className="mb-4 text-center">
-            This estimate includes everything needed for the project: utility
-            locates, digging posts, concrete, labour and materials!
-          </h1>
+          <h1 className="mb-4 text-center">Estimate includes Labour & Materials.</h1>
           {/* Radio Group */}
           <div className="flex flex-col md:flex-row items-start w-full justify-start gap-5 md:gap-0 md:justify-evenly mb-10">
             {/* Material Option */}
