@@ -14,7 +14,7 @@ export default function Inputs({ variable, func }) {
       <input
         type="number"
         inputMode="numeric"
-        pattern="[0-9]*"
+        pattern="[0-9.]*"
         className="appearance-none w-full md:w-50 lg:w-40 border border-gray-400 rounded px-2 py-1 focus:outline-none text-center"
         value={variable === 0 ? "" : variable}
         onChange={(e) => {
@@ -23,7 +23,7 @@ export default function Inputs({ variable, func }) {
           if (val === "") {
             func(0);
           } else {
-            const num = parseInt(val, 10);
+            const num = parseFloat(val, 10);
             if (!isNaN(num)) {
               func(num);
             }
