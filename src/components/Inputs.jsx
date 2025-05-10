@@ -13,7 +13,7 @@ export default function Inputs({ variable, func }) {
       </button>
       <input
         type="number"
-        inputMode="numeric"
+        inputMode="text"
         pattern="[0-9]*"
         className="appearance-none w-full md:w-50 lg:w-40 border border-gray-400 rounded px-2 py-1 focus:outline-none text-center"
         value={variable === 0 ? "" : variable}
