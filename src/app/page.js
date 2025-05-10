@@ -71,7 +71,7 @@ export default function Home() {
 
   useEffect(() => {
     if (total > 1200) {
-      setDisplayPrice(Math.trunc(total));
+      setDisplayPrice(Math.round(total));
     } else {
       setDisplayPrice(1200);
     }
